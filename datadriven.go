@@ -14,7 +14,7 @@
 // Package actor provides the structures for representing an actor who has
 // access to resources.
 
-// Package mypkg provides utilities extension of Table-Driven Testing.
+// Package datadriven provides utilities extension of Table-Driven Testing.
 package datadriven
 
 import (
@@ -392,8 +392,17 @@ func runDirective(t testing.TB, r *testDataReader, f func(testing.TB, *TestData)
 		if input == "" {
 			input = "<no input to command>"
 		}
-		// TODO(tbg): it's awkward to reproduce the args, but it would be helpful.
-		t.Logf("\n%s:\n%s [%d args]\n%s\n----\n%s", d.Pos, d.Cmd, len(d.CmdArgs), input, actual)
+		//t.Logf("\n%s:\n%s [%d args]\n%s\n----\n%s", d.Pos, d.Cmd, len(d.CmdArgs), input, actual)
+		//if input == "" {
+			//input = "<no input to command>"
+		//}
+		
+		// Reproduce the arguments for better logging.
+		args := make([]string, 0, len(d.CmdArgs))
+		for _, arg := range d.CmdArgs {
+			args = append(args, fmt.Sprintf("%s=%v", arg.Key, arg))
+		}
+		t.Logf("\n%s:\n%s [%d args: %s]\n%s\n----\n%s", d.Pos, d.Cmd, len(d.CmdArgs), args, input, actual)
 	}
 	return
 }
