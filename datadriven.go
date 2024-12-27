@@ -14,6 +14,7 @@
 // Package actor provides the structures for representing an actor who has
 // access to resources.
 
+// Package mypkg provides utilities extension of Table-Driven Testing.
 package datadriven
 
 import (
@@ -52,7 +53,7 @@ func Verbose() bool {
 	return testing.Verbose() && !*quietLog
 }
 
-// In CockroachDB we want to quiesce all the logs across all packages.
+// In neoDB we want to quiesce all the logs across all packages.
 // If we had only a flag to work with, we'd get command line parsing
 // errors on all packages that do not use datadriven. So
 // we make do by also making a command line parameter available.
